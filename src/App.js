@@ -9,24 +9,25 @@ import fetchData  from "./api/index.js";
 
 
 class App extends React.Component{
-    state={
+    state= {
         data: {},
     }
 
     async componentDidMount(){
-        const fetchedData =  fetchData();
+        const fetchedData = await fetchData();
         this.setState({data:fetchedData})
     }
 
     render(){
         const {data} = this.state;
+        
         return(
             <div className={styles.container}>
                 <Cards data={data}/>
                 <CountryPicker/>
                 <Chart/>
             </div>
-        );
+        )
     }
     
 }
