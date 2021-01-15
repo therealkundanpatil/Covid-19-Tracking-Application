@@ -8,19 +8,27 @@ import styles from "./App.module.css";
 import fetchData  from "./api/index.js";
 
 
-function App(){
+class App extends React.Component{
+    state={
+        data: {},
+    }
 
-    const data =  fetchData();
-    console.log(data);
+    async componentDidMount(){
+        const fetchedData =  fetchData();
+        this.setState({data:fetchedData})
+    }
 
-    return(
-        <div className={styles.container}>
-            <Cards/>
-            <CountryPicker/>
-            <Chart/>
-        </div>
-        
-    );
+    render(){
+        const {data} = this.state;
+        return(
+            <div className={styles.container}>
+                <Cards data={data}/>
+                <CountryPicker/>
+                <Chart/>
+            </div>
+        );
+    }
+    
 }
 
 export default App;

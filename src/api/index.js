@@ -6,8 +6,6 @@ async function fetchData(){
     try{
         const response = await axios.get(url);
 
-        console.log(response);
-
         const data = response.data
 
         const modifiedData = {
@@ -17,7 +15,7 @@ async function fetchData(){
             lastUpdate: data.lastUpdate,
         }
 
-
+        console.log(modifiedData);
         return modifiedData;
     }
     catch(error){
