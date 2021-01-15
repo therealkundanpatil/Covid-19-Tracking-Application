@@ -7,13 +7,14 @@ function Cards( {data: { confirmed, recovered, deaths, lastUpdate }} ){
 
     if(!confirmed){
         return "Loading...";
-    }   
+    }
+       
     return (
         <div className={styles.container}>
             <Grid container spacing={3} justify="center">
                 <Grid item component={Card}>
                     <CardContent>
-                        <Typography color="textSecondary" gutterButtom>
+                        <Typography color="textSecondary" gutterbuttom="true">
                             Infected
                         </Typography>
                         <Typography variant="h5">
@@ -24,7 +25,7 @@ function Cards( {data: { confirmed, recovered, deaths, lastUpdate }} ){
                             separator=","/>
                         </Typography>
                         <Typography color="textSecondary" >
-                            {new Date(lastUpdate).toDateString}
+                            {new Date(lastUpdate).toDateString()}
                         </Typography>
                         <Typography varaint="body2">
                             Number of Active Cases of Covid-19
@@ -33,7 +34,7 @@ function Cards( {data: { confirmed, recovered, deaths, lastUpdate }} ){
                 </Grid>
                 <Grid item component={Card}>
                     <CardContent>
-                        <Typography color="textSecondary" gutterButtom>
+                        <Typography color="textSecondary" gutterbuttom="true">
                             Recovered
                         </Typography>
                         <Typography variant="h5">
@@ -44,7 +45,7 @@ function Cards( {data: { confirmed, recovered, deaths, lastUpdate }} ){
                             separator=","/>
                         </Typography>
                         <Typography color="textSecondary" >
-                            {new Date(lastUpdate).toDateString}
+                            {new Date(lastUpdate).toDateString()}
                         </Typography>
                         <Typography varaint="body2">
                             Number of Recovered Cases of Covid-19
@@ -53,8 +54,8 @@ function Cards( {data: { confirmed, recovered, deaths, lastUpdate }} ){
                 </Grid>
                 <Grid item component={Card}>
                     <CardContent>
-                        <Typography color="textSecondary" gutterButtom>
-                            Infected
+                        <Typography color="textSecondary" gutterbuttom="true">
+                            Deaths
                         </Typography>
                         <Typography variant="h5">
                             <CountUp 
@@ -64,7 +65,7 @@ function Cards( {data: { confirmed, recovered, deaths, lastUpdate }} ){
                             separator=","/>
                         </Typography>
                         <Typography color="textSecondary" >
-                            {new Date(lastUpdate).toDateString}
+                            {new Date(lastUpdate).toDateString()}
                         </Typography>
                         <Typography varaint="body2">
                             Number of Death Cases of Covid-19
