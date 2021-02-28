@@ -3,6 +3,9 @@ import React from "react";
 import Cards from "./components/Cards/Cards.jsx";
 import Chart from "./components/Chart/Chart.jsx";
 import CountryPicker from "./components/CountryPicker/CountryPicker.jsx";
+import Header from "./components/Layout/HeaderSection/Header.jsx";
+import Footer from "./components/Layout/FooterSection/Footer.jsx";
+import ThemeContext from "./context/ThemeContext.jsx";
 
 import styles from "./App.module.css";
 import { fetchData } from "./api/index.js";
@@ -12,6 +15,7 @@ class App extends React.Component {
     state = {
         data: {},
         country: "",
+        theme: "",
     }
 
     async componentDidMount() {
@@ -24,17 +28,24 @@ class App extends React.Component {
         this.setState({ data: fetchedData, country: country });
     }
 
+    
+
     render() {
-        const { data, country } = this.state;
+        const { data, country, theme } = this.state;
 
         return (
-            <div className={styles.container}>
-                <img className= {styles.image} src={covidImage} alt="COVID-19"></img>
-                <Cards data={data} />
-                <CountryPicker handleCountryChange={this.handleCountryChange} />
-                <Chart data={data} country={country} />
-            </div>
-        )
+            <ThemeContext.Provider value = {theme}>
+                <div className={styles.container}>
+                    <Header></Header>
+                    
+                    <img className= {styles.image} src={covidImage} alt="COVID-19"></img>
+                    <Cards data={data} />
+                    <CountryPicker handleCountryChange={this.handleCountryChange} />
+                    <Chart data={data} country={country} />
+                    <Footer></Footer>
+                </div>
+            </ThemeContext.Provider>
+        );
     }
 
 }
