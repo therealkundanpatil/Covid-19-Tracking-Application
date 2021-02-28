@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Cards from "./components/Cards/Cards.jsx";
 import Chart from "./components/Chart/Chart.jsx";
@@ -11,42 +11,40 @@ import styles from "./App.module.css";
 import { fetchData } from "./api/index.js";
 import covidImage from "./images/covid-image.png";
 
-class App extends React.Component {
-    state = {
-        data: {},
-        country: "",
-        theme: "",
-    }
+function App() {
 
-    async componentDidMount() {
-        const fetchedData = await fetchData();
-        this.setState({ data: fetchedData });
-    }
+    const[data, setData] = useState({});
+    const[country, setCountry] = useState("");
 
-    handleCountryChange = async (country) => {
+    const handleCountryChange = async (country) => {
         const fetchedData = await fetchData(country);
-        this.setState({ data: fetchedData, country: country });
+        setCountry({data : fetchedData, country : country})
     }
 
     
+    useEffect(() => {
+        async function getData(){
+            const fetchedData = await fetchData();
+            setData(fetchedData);
+        }   
+        getData();      
+    },[data]);
+    
 
-    render() {
-        const { data, country, theme } = this.state;
-
-        return (
-            <ThemeContext.Provider value = {theme}>
-                <div className={styles.container}>
-                    <Header></Header>
-                    
-                    <img className= {styles.image} src={covidImage} alt="COVID-19"></img>
-                    <Cards data={data} />
-                    <CountryPicker handleCountryChange={this.handleCountryChange} />
-                    <Chart data={data} country={country} />
-                    <Footer></Footer>
-                </div>
-            </ThemeContext.Provider>
-        );
-    }
+    const themeHook = useState("light")
+    return (
+        <ThemeContext.Provider value = {themeHook}>
+            <div className={styles.container}>
+                <Header></Header>
+                <img className= {styles.image} src={covidImage} alt="COVID-19"></img>
+                <Cards data={data} />
+                <CountryPicker handleCountryChange={handleCountryChange} />
+                <Chart data={data} country={country} />
+                <Footer></Footer>
+            </div>
+        </ThemeContext.Provider>
+    );
+    
 
 }
 
