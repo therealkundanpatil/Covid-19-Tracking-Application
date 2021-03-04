@@ -14,7 +14,7 @@ function CountryPicker({handleCountryChange}) {
             setFetchedCountries(receivedCountries);
         }
         fetchAPI();
-    }, [setFetchedCountries])
+    }, [])
 
 
     console.log(fetchedCountries);

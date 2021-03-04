@@ -20,7 +20,6 @@ export const fetchData = async (country) => {
             lastUpdate: data.lastUpdate,
         }
 
-        console.log(modifiedData);
         return modifiedData;
     }
     catch (error) {

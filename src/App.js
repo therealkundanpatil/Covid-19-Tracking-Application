@@ -10,6 +10,8 @@ import ThemeContext from "./context/ThemeContext.jsx";
 import styles from "./App.module.css";
 import { fetchData } from "./api/index.js";
 import covidImage from "./images/covid-image.png";
+import {Button} from "reactstrap";
+import ThemeToggler from "./components/ThemeToggler.jsx";
 
 function App() {
 
@@ -18,7 +20,8 @@ function App() {
 
     const handleCountryChange = async (country) => {
         const fetchedData = await fetchData(country);
-        setCountry({data : fetchedData, country : country})
+        setData(fetchedData);
+        setCountry(country);
     }
 
     
@@ -28,15 +31,20 @@ function App() {
             setData(fetchedData);
         }   
         getData();      
-    },[data]);
+    },[]);
     
 
     const themeHook = useState("light")
+
     return (
         <ThemeContext.Provider value = {themeHook}>
             <div className={styles.container}>
                 <Header></Header>
-                <img className= {styles.image} src={covidImage} alt="COVID-19"></img>
+                <section>
+                    <Button>Click Me</Button>
+                </section>
+                <ThemeToggler></ThemeToggler>        
+                <img className= {styles.image} src={covidImage} alt="COVID-19"></img>    
                 <Cards data={data} />
                 <CountryPicker handleCountryChange={handleCountryChange} />
                 <Chart data={data} country={country} />
